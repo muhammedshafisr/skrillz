@@ -10,7 +10,8 @@ export function* handleRequestLogin(action) {
     // save the user to local storage
     localStorage.setItem("user", JSON.stringify(data));
 
-    yield put(setUser(data));
+    yield put(setUser(data.user));
+
   } catch (error) {
     yield put(setLoginError(error));
     console.log(error.response.data);

@@ -1,13 +1,22 @@
 import { fork, takeLatest, all } from "redux-saga/effects";
 import { AUTH_USER } from "../ducks/authUser";
 import { GET_USER } from "../ducks/user";
+import { AUTH_ADMIN } from "../ducks/adminAuth";
+import { ADD_COVER, REMOVE_COVER, REMOVE_IMAGE, UPDATE_COVER, UPDATE_PROFILE } from "../ducks/profile";
 import { handleRequestAdminAuth } from "./handlers/adminAuthHandler";
 import { handleRequestAuth } from "./handlers/authUser";
 import { handleRequestLogin } from "./handlers/loginUser";
-import { AUTH_ADMIN } from "../ducks/adminAuth";
+import { handleCoverRemove } from "./handlers/removeCoverHandler";
+import { handleAddCover } from "./handlers/addCoverHandler";
+import { handleUpdateCover } from "./handlers/updateCoverHandler";
+import { handleProfileUpdate } from "./handlers/updateProfileHandler";
+import { handleRemoveProfileImage } from "./handlers/removeProfileImageHandler";
+import { SEARCH_IT } from "../ducks/search";
+import { handleSearch } from "./handlers/searchHandler";
+import { GET_FOLLOW } from "../ducks/follow";
+import { handleFollow } from "./handlers/followHandlers/followHandler";
 
-
-// catching user authentication 
+// catching user authentication
 export function* watchAuthUser() {
   yield takeLatest(AUTH_USER, handleRequestAuth);
 }
@@ -17,6 +26,36 @@ export function* watchLoginUser() {
   yield takeLatest(GET_USER, handleRequestLogin);
 }
 
+export function* watchRemoveCover() {
+  yield takeLatest(REMOVE_COVER, handleCoverRemove);
+}
+
+export function* watchAddCover() {
+  yield takeLatest(ADD_COVER, handleAddCover);
+}
+
+export function* watchUpdateCover() {
+  yield takeLatest(UPDATE_COVER, handleUpdateCover);
+}
+
+export function* watchUpdateProfile() {
+  yield takeLatest(UPDATE_PROFILE, handleProfileUpdate);
+}
+
+export function* watchRemoveProfileImage() {
+  yield takeLatest(REMOVE_IMAGE, handleRemoveProfileImage);
+}
+
+// Searching
+export function* watchSearch() {
+  yield takeLatest(SEARCH_IT, handleSearch);
+}
+
+// follow request
+export function* watchFollow() {
+  yield takeLatest(GET_FOLLOW, handleFollow);
+}
+
 // admin saga for temporary
 export function* watchLoginAdmin() {
   yield takeLatest(AUTH_ADMIN, handleRequestAdminAuth);
@@ -24,5 +63,16 @@ export function* watchLoginAdmin() {
 
 // exporting to watcher saga
 export default function* rootSaga() {
-  yield all([fork(watchLoginUser), fork(watchAuthUser), fork(watchLoginAdmin)]);
+  yield all([
+    fork(watchLoginUser),
+    fork(watchAuthUser),
+    fork(watchLoginAdmin),
+    fork(watchRemoveCover),
+    fork(watchAddCover),
+    fork(watchUpdateCover),
+    fork(watchUpdateProfile),
+    fork(watchRemoveProfileImage),
+    fork(watchSearch),
+    fork(watchFollow)
+  ]);
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export function requestCreateUser(data) {
-  console.log("im going form signup");
+
   return axios.request({
     headers: { "Content-type": "application/json" },
     method: "post",

@@ -1,21 +1,37 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        primary: '#FF6363',
+        primary: "#FF6363",
         secondary: {
-          100: '#E2E2D5',
-          200: '#888883',
+          100: "#E2E2D5",
+          200: "#888883",
         },
-      fontFamily: {
-        body: ['Nunito']
-      }
-      }
+        fontFamily: {
+          body: ["Nunito"],
+        },
+      },
+      animation: {
+        text: "text 5s ease infinite",
+      },
+      keyframes: {
+        text: {
+          "0%, 100%": {
+            "background-size": "200% 200%",
+            "background-position": "left center",
+          },
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "right center",
+          },
+        },
+      },
     },
+    ripple: (theme) => ({
+      colors: theme("colors"),
+    }),
   },
-  plugins: [],
-}
+  plugins: [require("flowbite/plugin"), require("tailwindcss-ripple")()],
+};

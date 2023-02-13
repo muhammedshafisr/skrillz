@@ -28,7 +28,9 @@ app.use("/api/user", userRoutes);
 
 app.use("/api/admin", adminRoutes);
 
+
 // connect ot db
+mongoose.set('strictQuery', false);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {

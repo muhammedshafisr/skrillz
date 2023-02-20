@@ -31,8 +31,8 @@ const initialState = {
   user: undefined,
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action) => {
-  console.log(1);
   switch (action.type) {
     case SETAUTH_USER:
       const { user } = action;

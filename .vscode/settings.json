@@ -4,5 +4,6 @@
         "lastname",
         "SETAUTH",
         "Skrillz"
-    ]
+    ],
+    "editor.formatOnSave": true
 }

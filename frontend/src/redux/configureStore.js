@@ -4,6 +4,8 @@ import rootSaga from "./sagas/rootSaga";
 import UserAuthReducer, { error } from "./ducks/authUser";
 import UserLoginReducer, { loginError } from "./ducks/user";
 import AdminLoginReducer, { adminError } from "./ducks/adminAuth";
+import UserAuthorization from "./ducks/userAuthorization";
+import SearchItems from "./ducks/search";
 
 const reducer = combineReducers({
   UserAuth: UserAuthReducer,
@@ -12,6 +14,8 @@ const reducer = combineReducers({
   UserLoginError: loginError,
   AdminAuth: AdminLoginReducer,
   AdminAuthError: adminError,
+  isAuth: UserAuthorization,
+  searchList: SearchItems
 });
 
 const sagaMiddleware = createSagaMiddleware();

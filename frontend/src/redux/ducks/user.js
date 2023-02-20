@@ -4,6 +4,7 @@ const SETLOGIN_ERROR = "SETAUTH_ERROR";
 const LOGOUT = "LOGOUT";
 const REMOVE_ERROR = "REMOVE_ERROR";
 
+
 export const getUser = (user) => ({
   type: GET_USER,
   user,
@@ -31,6 +32,13 @@ const initialState = {
   user: undefined,
 };
 
+const user = JSON.parse(localStorage.getItem('user'))
+
+    if (user) {
+      initialState.user = user.user;
+    }
+
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:

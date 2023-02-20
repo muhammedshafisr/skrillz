@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { authUser } from "../../redux/ducks/authUser";
+import OtpSection from "./otpSection";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,7 +18,7 @@ const Signup = () => {
 
   const useHandleSubmit = async (e) => {
     e.preventDefault();
-
+    
     const user = {
       firstname,
       lastname,
@@ -47,6 +48,12 @@ const Signup = () => {
   }
 
   return (
+    <>
+  {/* popup modal */}
+
+    <OtpSection />
+
+
     <div className="inp_section flex justify-center items-center min-h-[500px] max-h-screen mt-12 bg-slate-900 md:pl-14">
       <form
         className="flex flex-col items-center min-w-[400px]"
@@ -54,11 +61,11 @@ const Signup = () => {
       >
         <h1 className="font-normal mb-3 text-xl subpixel-antialiased text-slate-50 select-none">Create your account</h1>
         <div className="duplex_inp_lab">
-          {user ? (
+          {/* {user ? (
             <p className="text-green-500">Successfully signed up</p>
-          ) : (
-            err && <p className="text-red-700">{err.error} </p>
-          )}
+          ) : ( */}
+            {err && <p className="text-red-700">{err.error} </p>
+          }
           <label className="inline-block max-w-[180px] mr-2">
             <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
               First name
@@ -153,7 +160,7 @@ const Signup = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6 inline-block relative -top-8 left-[320px] cursor-pointer hidden"
+            className="w-6 h-6 relative -top-8 left-[320px] cursor-pointer hidden"
           >
             <path
               strokeLinecap="round"
@@ -186,7 +193,12 @@ const Signup = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 
 export default Signup;
+
+export const handleShowOtpModal = () => {
+  document.querySelector("#staticModal").classList.remove("hidden");
+}

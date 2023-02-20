@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { setAdminAuthError, setAuthAdmin } from "../../redux/ducks/adminAuth";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 
 const AdminNavbar = () => {
-
   const admin = useSelector((state) => state.AdminAuth.admin);
   const dispatch = useDispatch();
-
 
   function handleMenu() {
     const menu = document.querySelector("#menu");
@@ -20,78 +18,84 @@ const AdminNavbar = () => {
   }
 
   useEffect(() => {
-    const admin = JSON.parse(localStorage.getItem('admin'));
+    const admin = JSON.parse(localStorage.getItem("admin"));
 
     if (admin) {
       dispatch(setAuthAdmin(admin));
-      dispatch(setAdminAuthError({undefined}));
+      dispatch(setAdminAuthError({ undefined }));
     }
-  }, [])
+  }, [dispatch]);
 
   const handleLogout = () => {
-
     // removing user from local storage and global state
-    localStorage.removeItem('admin');
+    localStorage.removeItem("admin");
     dispatch(setAuthAdmin(undefined));
+  };
 
-  }
-
-
-    return (
-        <>
-        <div className="grid md:grid-cols-6 bg-slate-900">
+  return (
+    <>
+      <div className="grid md:grid-cols-6 bg-slate-900">
         <div className="md:col-span-1 md:flex md:justify-center">
-          { admin && 
-          <nav className="relative min-w-150 text-right md:fixed md:w-2/12 z-10">
-            <ul
-              className="text-sm h-screen mt-14 pt-7 bg-slate-900 hidden fixed border-r border-slate-800 md:block md:relative w-full"
-              id="menu"
-            >
-              <li className="text-gray-700 font-bold py-1 h-12">
-                <Link to="/admin" className="px-4 flex justify-center">
-                  <span className="text-base">Dashboard</span>
-                  <svg
-                    className="w-5 ml-2"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                  </svg>
-                </Link>
-              </li>
-              <li className="py-1 font-bold text-gray-700 h-12">
-                <Link href="#" className="px-4 flex justify-center">
-                  <span className="text-base">Users</span>
-                </Link>
-              </li>
-              <li className="py-1 font-bold text-gray-700 h-12">
-                <Link href="#" className="px-4 flex justify-center">
-                  <span className="text-base text-center">Channels</span>
-                </Link>
-              </li>
-              <li className="py-1 font-bold text-gray-700 h-12">
-                <Link href="#" className="px-4 flex justify-center">
-                  <span className="text-base">Reports</span>
-                </Link>
-              </li>
-              <li className="py-1 font-bold text-gray-700 h-12 md:hidden">
-                <Link onClick={ handleLogout } className="px-4 flex justify-center">
-                  <span className="text-base">Logout</span>
-                </Link>
-              </li>
-            </ul>
-          </nav> }
+          {admin && (
+            <nav className="relative min-w-[230px] text-right md:fixed md:w-2/12 z-10">
+              <div className="md:p-4 bg-slate-900 border-r border-slate-800">
+                <ul
+                  className="text-sm h-screen shadow-slate-800 shadow-2xl mt-14 pt-7 bg-slate-900 hidden fixed md:block md:relative w-full"
+                  id="menu"
+                >
+                  <li className="select-none text-slate-100 shadow-slate-700 shadow-2xl font-normal flex justify-center items-center py-1 h-12">
+                    <Link
+                      to="/admin"
+                      className="px-4 flex justify-center hover:text-green-600 transition ease-in duration-500"
+                    >
+                      <span className="text-base">Dashboard</span>
+                      <svg
+                        className="w-5 ml-2"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                      </svg>
+                    </Link>
+                  </li>
+                  <li className="select-none shadow-slate-700 shadow-2xl py-1 font-normal flex justify-center items-center text-slate-100 h-12">
+                    <Link to="/admin/user" className="px-4 flex justify-center">
+                      <span className="text-base">Users</span>
+                    </Link>
+                  </li>
+                  <li className="select-none shadow-slate-700 shadow-2xl py-1 font-normal flex justify-center items-center text-slate-100 h-12">
+                    <Link href="#" className="px-4 flex justify-center">
+                      <span className="text-base text-center">Channels</span>
+                    </Link>
+                  </li>
+                  <li className="select-none shadow-slate-700 shadow-2xl py-1 font-normal flex justify-center items-center text-slate-100 h-12">
+                    <Link href="#" className="px-4 flex justify-center">
+                      <span className="text-base">Reports</span>
+                    </Link>
+                  </li>
+                  <li className="select-none py-1 font-normal flex justify-center items-center text-slate-100 h-12 md:hidden">
+                    <Link
+                      onClick={handleLogout}
+                      className="px-4 flex justify-center text-slate-100"
+                    >
+                      <span className="text-base">Logout</span>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          )}
         </div>
 
-        <main className="fixed md:px-16 md:col-span-10 backdrop-blur-sm bg-slate-900 border-b border-slate-800 md:fixed flex justify-between w-full z-20">
-          <h1 className="font-bold uppercase p-4">
+        <main className="fixed bg-transparent md:px-16 md:col-span-10 backdrop-blur-sm bg-slate-900 border-b border-slate-800 md:fixed flex justify-between w-full z-20 shadow-inner shadow-cyan-800">
+          <h1 className="font-bold uppercase p-4 select-none">
             <Link
-              href="/"
-              className="text-slate-100 hover:text-sky-500 tracking-widest"
+              href="/admin"
+              className="text-slate-100 hover:text-sky-500 tracking-widest transition ease-out duration-700"
             >
               Skrillz
             </Link>
@@ -127,18 +131,22 @@ const AdminNavbar = () => {
           </div> */}
 
           <div className="flex items-center">
-            {! admin && <Link
-              to="/admin"
-              className="hidden btn text-slate-100 rounded hover:bg-sky-500 hover:text-slate-100 transition ease-out duration-1000 md:block"
-            >
-              Admin
-            </Link>}
-            {admin && <Link
-              onClick={ handleLogout }
-              className="hidden btn text-slate-100 rounded hover:bg-sky-500 hover:text-slate-100 transition ease-out duration-1000 md:block"
-            >
-              Logout
-            </Link>}
+            {!admin && (
+              <Link
+                to="/admin"
+                className="hidden shadow-slate-700 shadow-2xl border btn p-1 text-slate-100 rounded hover:bg-sky-500 hover:text-slate-100 transition ease-out duration-1000 md:block"
+              >
+                Admin
+              </Link>
+            )}
+            {admin && (
+              <Link
+                onClick={handleLogout}
+                className="hidden shadow-slate-700 shadow-2xl border btn p-1 text-slate-100 rounded hover:bg-sky-500 hover:text-slate-100 transition ease-out duration-1000 md:block"
+              >
+                Logout
+              </Link>
+            )}
             <div className="flex justify-between items-center md:justify-center">
               <div
                 className="px-4 cursor-pointer md:hidden"
@@ -162,7 +170,7 @@ const AdminNavbar = () => {
         </main>
       </div>
     </>
-    );
-}
- 
+  );
+};
+
 export default AdminNavbar;

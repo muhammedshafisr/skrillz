@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../redux/ducks/user";
+import { getUser, removeError } from "../../redux/ducks/user";
+import { removeAuthError } from "../../redux/ducks/authUser";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
   const dispatch = useDispatch();
 
   const loginError = useSelector((state) => state.UserLoginError);
@@ -14,12 +15,19 @@ const Login = () => {
     e.preventDefault();
 
     const data = {
-      email,
-      password,
+      userEmail,
+      userPassword
     };
 
     dispatch(getUser(data));
   };
+
+  useEffect(() => {
+    dispatch(removeError());
+    dispatch(removeAuthError());
+
+  }, [])
+  
 
   return (
     <div className="inp_section flex justify-center items-center min-h-[500px] max-h-screen mt-6 bg-slate-900 md:pl-14">
@@ -36,8 +44,8 @@ const Login = () => {
           </span>
           <input
             type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            onChange={(e) => setUserEmail(e.target.value)}
+            value={userEmail}
             className="select-none min-w-[350px] peer mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
             placeholder="you@example.com"
           />
@@ -52,8 +60,8 @@ const Login = () => {
           </span>
           <input
             type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
+            onChange={(e) => setUserPassword(e.target.value)}
+            value={userPassword}
             name="password"
             className="min-w-[350px] mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
           />

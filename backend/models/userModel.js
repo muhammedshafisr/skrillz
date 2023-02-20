@@ -28,6 +28,19 @@ const userSchema = new Schema(
       required: true,
       minLength: 6,
     },
+    image: {
+      type: String
+    },
+    cover_image: {
+      type: String
+    },
+    address: {
+      type: String
+    },
+    status: {
+      type: String,
+      required: true
+    }
   },
   { timestamps: true }
 );
@@ -65,6 +78,7 @@ userSchema.statics.signup = async function (
     firstname,
     lastname,
     phone,
+    status: "active"
   });
 
   return user;

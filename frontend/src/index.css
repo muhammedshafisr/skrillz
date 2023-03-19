@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital, wght@0, 200;0, 300;0, 400;0, 500;0, 600;0, 700;0, 800;0, 900;0, 1000;1, 200;1, 300;1, 400;1, 500;1, 700;1, 800;1, 900;1, 1000 &display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .scrollbar-medium::-webkit-scrollbar {
+        width: 3px;
+    }
+}
+
+.D9WLyEQaARfWqCTyVrpU {
+    box-shadow: none !important;
+    width: 100% !important;
+}
+
+.QajuHzlZleFtiTUp_E8u {
+    box-shadow: none !important;
+}
+
+:root {
+    --font-family: 'Manrope', sans-serif;
+
+    --gradient-text: linear-gradient(89.97deg, #AE67FA 1.84%, #F49867 102.67%);
+    --gradient-bar: linear-gradient(103.22deg, #AE67FA -13.86%, #F49867 99.55%);
+
+    --color-bg: #040C18;
+    --color-footer: #031B34;
+    --color-blog: #042c54;
+    --color-text: #81AFDD;
+    --color-subtext: #FF8A71;
+}
+
+
+body {
+    background: var(--color-bg);
+}
+
+
+.gradient__bg {
+    /* background: -moz-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%); */
+
+    /* safari 5.1+,chrome 10+ */
+    /* background: -webkit-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%); */
+
+    /* opera 11.10+ */
+    /* background: -o-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%); */
+
+    /* ie 10+ */
+    /* background: -ms-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%); */
+
+    /* global 92%+ browsers support */
+    /* background: radial-gradient(circle at 3% 25%, rgb(125,211,252) 0%, rgb(17, 24, 39) 50%); */
+    /* background: radial-gradient(#0f172a, #a5f3fc); */
+    /* background: radial-gradient(ellipse at right, #15cfe4, transparent); */
+    background: radial-gradient(ellipse at left, rgb(17, 24, 39) 50%, transparent), radial-gradient(ellipse at top, rgb(17, 24, 39) 25%, transparent), radial-gradient(ellipse at right, rgb(125, 211, 252) 0%, transparent), radial-gradient(ellipse at bottom, rgb(17, 24, 39) 100%, transparent);
+}
+
+.gradient__text {
+    background: var(--gradient-text);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
